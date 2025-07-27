@@ -1,7 +1,7 @@
 {
   "serverEndpoint": "https://play.deviantscraft.site:5200",
   "redirectUrl": "https://nobii.dev/src/landing",
-  "sponsorImageUrls": ["assets/misc/logo.webp"],
+  "sponsorImageUrls": ["/assets/misc/logo.webp"],
   "sponsorImageRotateSpeed": 5000,
   "attackerColorPrimary": "#b82e3c",
   "attackerColorSecondary": "#ff4557",
