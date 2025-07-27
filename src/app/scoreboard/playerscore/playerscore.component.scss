@@ -1,0 +1,392 @@
+@font-face {
+  font-family: DIN Next W1G Regular;
+  src: url("../../../../public/assets/fonts/DINNextW1G/dinnextw1g.otf") format("opentype");
+} 
+
+@font-face {
+  font-family: DIN Next W1G Medium;
+  src: url("../../../../public/assets/fonts/DINNextW1G/dinnextw1g_medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Tungsten;
+  src: url("../../../../public/assets/fonts/Tungsten/Tungsten-Bold.ttf") format("truetype");
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.right {
+  @extend .flip;
+}
+
+.playerscore-component {
+  display: flex;
+  height: 58px;
+  width: 885px;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  flex: 0 0 auto;
+  transform: translateY(110px);
+
+  &.minimal {
+    @extend .playerscore-component;
+    width: auto;
+
+    &.defender {
+      background: linear-gradient(
+        90deg,
+        rgba(var(--defender-color-rgb), 0) 3.74%,
+        rgba(var(--defender-color-rgb), 0.65) 5.57%,
+        rgba(var(--defender-color-rgb), 0.3) 42.42%,
+        rgba(var(--defender-color-rgb), 0) 67.11%
+      );
+    }
+
+    &.attacker {
+      background: linear-gradient(
+        90deg,
+        rgba(var(--attacker-color-rgb), 0) 4.69%,
+        rgba(var(--attacker-color-rgb), 0.65) 6.5%,
+        rgba(var(--attacker-color-rgb), 0.3) 53.1%,
+        rgba(var(--attacker-color-rgb), 0) 74.57%
+      );
+    }
+  }
+}
+
+.playerinfo-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+}
+
+.agent-icon {
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+  width: 74px;
+  height: 57.5px;
+  overflow: hidden;
+  object-fit: cover;
+  transform: translate(-43px, -2px);
+}
+
+.playername-container {
+  display: flex;
+  flex-direction: column;
+  width: 121px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  position: relative;
+  align-self: stretch;
+  left: -56px;
+  top: -2px;
+}
+
+.playername-text {
+  position: relative;
+  width: fit-content;
+  font-family: "DIN Next W1G Regular", sans-serif;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: left;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+
+  &.minimal {
+    @extend .playername-text;
+    font-size: 18px;
+  }
+}
+
+.playername-container.right .playername-text {
+  left:0px;
+  width: 100%;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.agentname-text {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+
+  &.attacker {
+    @extend .agentname-text;
+    color: var(--attacker-color-shield-currency);
+  }
+
+  &.defender {
+    @extend .agentname-text;
+    color: var(--defender-color-shield-currency);
+  }
+}
+
+.ultimate-container {
+  scale: 1.17;
+  transform: translate(-74px, -2px);
+}
+
+.resources-container {
+  display: flex;
+  width: 530px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  position: relative;
+  align-self: stretch;
+  margin-left: -85.6px;
+  left: 7px;
+
+  &.minimal {
+    @extend .resources-container;
+    width: 360px;
+  }
+}
+
+.rank-icon-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: -5px;
+  top: 44px;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.rank-icon {
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.shield-icon-container {
+  position: absolute;
+  left: 268.5px;
+  transform: translateY(-2px);
+  width: 36px;
+  height: 36px;
+}
+
+.shield-icon {
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.KDA-tracker-wrapper {
+  display: flex;
+  width: 120px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  align-self: stretch;
+  left: -256px;
+
+  &.minimal {
+    @extend .KDA-tracker-wrapper;
+    width: 170px;
+  }
+}
+
+.KDA-tracker {
+  position: relative;
+  width: fit-content;
+  font-family: "DIN Next W1G Medium", sans-serif;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+
+  display: flex;
+  flex-direction: row;
+  gap: 12px; 
+  color: #fff; 
+
+  width: auto;
+  justify-content: flex-start;
+
+  &.minimal {
+    @extend .KDA-tracker;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
+.KDA-tracker-bundle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.KDA-title {
+  @extend .agentname-text;
+  color: white;
+}
+
+.KDA-kills {
+  color: #ffffff;
+  font-family: "DIN Next W1G Medium", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  text-align: center;
+  
+}
+
+.KDA-deaths {
+  color: #ffffff;
+  font-family: "DIN Next W1G Medium", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.KDA-assists {
+  color: #ffffff;
+  font-family: "DIN Next W1G Medium", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.weapon-icon-container {
+  display: flex;
+  min-width: 160px;
+  max-width: 200px;
+  flex-shrink: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  align-self: stretch;
+  transform: translate(-64px, 14px);
+}
+
+.weapon-icon-wrapper {
+  align-items: flex-start;
+  justify-content: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 190px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.weapon-icon {
+  position: relative;
+  max-height: 25px;
+  max-width: 100px;
+  object-fit: cover;
+}
+
+.money-container {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  transform: translateY(-2px);
+  left: 65px;
+}
+
+.money-element {
+  position: relative;
+  width: fit-content;
+  opacity: 0.8;
+  font-family: "DIN Next W1G Medium", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  line-height: normal;
+  white-space: nowrap;
+  margin: -5px;
+}
+
+.credits-icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.money-text {
+  letter-spacing: 0;
+  font-family: "DIN Next W1G Medium", sans-serif;
+  font-size: 20px;
+
+  &-red {
+    @extend .money-text;
+    color: #F4E9A0;
+  }
+
+  &-white {
+    @extend .money-text;
+    color: white;
+  }
+}
+
+app-abilities {
+  min-width: 90px;
+  margin: 0 5px;
+  transform: translate(16px, -16px);
+}
+
+.agent-color {
+  transform: translateX(-6px);
+}
+
+.KDA-kills,
+.KDA-deaths,
+.KDA-assists {
+  /* Additional spacing if needed */
+  margin: 0 4px;
+  text-align: center;
+}
+
+.playerscore-component.non-auxiliary .ultimate-container {
+  transform: translate(-206px, -2px);
+}
+
+.playerscore-component.non-auxiliary .ultimate-container.right {
+  transform: translate(-206px, -2px) scaleX(-1);
+}
+
+.playerscore-component.non-auxiliary .shield-icon-container {
+  transform: translate(-161px, -2px);
+}
+
+.playerscore-component.non-auxiliary .weapon-icon-container {
+  transform: translate(-224px, 14px);
+}
+
+.playerscore-component.non-auxiliary .money-container {
+  transform: translate(-158px, -2px);
+}
+
+.ultimate-container.right {
+  transform: translate(-73px, -1.5px) scaleX(-1);
+}
+
+.ultimate-container.shift-ultimate {
+  transform: translate(-69px, -2px) !important;
+}
+.ultimate-container.shift-ultimate.right {
+  transform: translate(-68px, -1.5px) scaleX(-1) !important;
+}

@@ -1,0 +1,128 @@
+<div class="round-reasons-container" *ngIf="match.teams[0].roundRecord.length > 0">
+  <div class="left-team">
+    <div 
+    class="team-info"
+    [ngStyle]="{
+    transform: match.roundNumber >= 9 ? 'translate(-60px, 5px)' : 'translate(-70px, 5px)'
+    }">
+      {{ match.teams[0].teamTricode }}
+    </div>
+    <div class="round-fade" *ngIf="match.roundNumber >= 9">
+      <img src="{{ assets }}/scoreboard/roundReasons/roundFade.svg" />
+    </div>
+    <div class="team-roundsWon"
+         [ngClass]="{ 'attacking': match.teams[0].isAttacking, 'defending': !match.teams[0].isAttacking }"
+         [ngStyle]="{
+           left: match.roundNumber >= 9 ? '64px' : '44px'
+         }">
+      {{ match.teams[0].roundsWon }}
+    </div>
+    <div class="reason-container">
+      <div
+      *ngFor="
+      let record of match.teams[0].roundRecord
+        | slice: getReasonStartIndex() : getReasonStartIndex() + roundRecordLength"
+        class="round-wrapper"
+        [ngClass]="{ 'lost-round': record.type === 'lost' }"
+      >
+        <div
+          class="six-square"
+          *ngIf="record.round === 14 && match.roundNumber < 14"
+          [ngStyle]="{transform: match.teams[0].roundsWon === 0 ? 'translate(24px, 28px)' : 'translate(24px, 24px)'}"
+        ></div>
+
+        <div
+          class="round-svg-container"
+          *ngIf="record.type !== 'lost' && record.type !== 'upcoming'"
+        >
+          <img
+            class="round-svg"
+            [src]="record.wasAttack
+              ? assets + '/scoreboard/roundReasons/redWin.svg'
+              : assets + '/scoreboard/roundReasons/greenWin.svg'"
+          />
+          <img
+            class="round-image"
+            [src]="assets + '/roundWinReason/' + record.type + '.webp'"
+          />
+        </div>
+
+        <div
+          class="reason-color lost"
+          *ngIf="
+            record.type === 'lost' &&
+            !(record.round === 14 && match.roundNumber < 14)
+          "
+          >
+          <div class="round-number">{{ record.round }}</div>
+        </div>
+
+        <div
+          class="reason-color lost"
+          *ngIf="
+            record.type === 'upcoming' &&
+            !(record.round === 14 && match.roundNumber < 14)
+          "
+        >
+            <div class="round-number-upcoming">{{ record.round }}</div>
+          <div class="current-round-indicator" *ngIf="record.round === match.roundNumber">
+            <img [src]="assets + '/scoreboard/roundReasons/currentRound.svg'" class="current-round-svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-team"
+    [ngStyle]="{
+      transform: match.teams[0].roundsWon === 0 ? 'translateY(9px)' : 'translateY(0px)'
+      }">
+    <div 
+    class="team-info"
+    [ngStyle]="{
+      transform: match.roundNumber >= 9 ? 'translate(-60px, 5px)' : 'translate(-70px, 5px)'
+      }">
+      {{ match.teams[1].teamTricode }}
+    </div>
+    <div class="round-fade" *ngIf="match.roundNumber >= 9">
+      <img style="opacity:0;pointer-events:none;" src="{{ assets }}/scoreboard/roundReasons/roundFade.svg" />
+    </div>
+    <div class="team-roundsWon"
+         [ngClass]="{ 'attacking': match.teams[1].isAttacking, 'defending': !match.teams[1].isAttacking }"
+         [ngStyle]="{
+          left: match.roundNumber >= 9 ? '60px' : '40px'
+        }">
+      {{ match.teams[1].roundsWon }}
+    </div>
+    <div class="reason-container">
+      <div *ngFor="
+      let record of match.teams[1].roundRecord
+        | slice: getReasonStartIndex() : getReasonStartIndex() + roundRecordLength"
+        class="round-wrapper"
+        [ngClass]="{ 'lost-round': record.type === 'lost' }">
+        <div
+          class="round-svg-container"
+          [ngClass]="record.wasAttack ? 'attacker' : 'defender'"
+          *ngIf="record.type !== 'lost' && record.type !== 'upcoming'"
+        >
+          <img
+            class="round-svg"
+            [src]="record.wasAttack
+              ? assets + '/scoreboard/roundReasons/redWin.svg'
+              : assets + '/scoreboard/roundReasons/greenWin.svg'"
+          />
+          <img
+            class="round-image"
+            [src]="assets + '/roundWinReason/' + record.type + '.webp'"
+          />
+        </div>
+
+        <div 
+        class="reason-color lost" 
+        *ngIf="record.type === 'lost'">
+          <div class="round-number">{{ record.round }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

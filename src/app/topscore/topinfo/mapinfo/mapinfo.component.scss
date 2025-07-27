@@ -1,0 +1,89 @@
+@font-face {
+  font-family: DIN Next W1G Medium;
+  src: url(../../../../../public/assets/fonts/DINNextW1G/dinnextw1g_medium.otf) format("opentype");
+}
+
+:host {
+  display: block;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  transform: translate(10px, -5px);
+}
+
+.text {
+  position: relative;
+  width: fit-content;
+  font-family: "DIN Next W1G Medium", Helvetica;
+  color: #ffffff;
+  font-size: 14px;
+  font-style: normal;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pill-bg {
+  position: relative; // changed from absolute
+  top: 0px; // adjust as needed
+  right: -4px; // adjust as needed
+  min-width: 180px;
+  min-height: 32px;
+  width: 0px;
+  height: 32px;
+  scale: 1.2;
+}
+
+.pill-bg-svg {
+  position: absolute;
+  top: 0;
+  width: 180px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pill-bg-svg.past {
+  left: 0;
+}
+.pill-bg-svg.present {
+  left: -2px;
+}
+.pill-bg-svg.future {
+  left: -4px;
+  top: -1px;
+}
+
+.pill-content {
+  position: relative; // changed from absolute
+  width: 180px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DIN Next W1G Medium", Helvetica;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.logo {
+  padding: 2px 4px;
+  max-width: 14px;
+  max-height: 14px;
+  vertical-align: middle;
+}

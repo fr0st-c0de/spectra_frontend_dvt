@@ -1,0 +1,528 @@
+@font-face {
+  font-family: DIN Next W1G Regular;
+  src: url("../../../../public/assets/fonts/DINNextW1G/dinnextw1g.otf") format("opentype");
+}
+
+@font-face {
+  font-family: DIN Next W1G Heavy;
+  src: url("../../../../public/assets/fonts/DINNextW1G/dinnextw1g_heavy.otf") format("opentype");
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.right {
+  @extend .flip;
+}
+
+.player-container {
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.agent-icon-container {
+  z-index: 1;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: absolute;
+  overflow: hidden;
+  object-fit: cover;
+  top: -114px;
+  left: -30px;
+  width: 74px;
+  height: 38px;
+}
+
+.agent-icon {
+  position: absolute;
+  width: 80%;
+  height: 57.5px;
+  top: -12px;
+  left: 0px;
+  scale: 1.2;
+
+  &.dead {
+    @extend .agent-icon;
+    filter: grayscale(1);
+  }
+}
+
+.player-card {
+  height: 95px;
+  min-height: 95px;
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+  transform: translate(-30px, -114px);
+
+  &.dead {
+    @extend .player-card;
+  }
+}
+
+.utility-container {
+  align-items: flex-start;
+  padding: 0px 0px 4px 18px;
+  display: flex;
+  flex-direction: column;
+  width: 186px;
+  height: 74px;
+  justify-content: flex-end;
+  gap: 4px;
+  position: relative;
+  border: 0px none;
+
+  &.attacker {
+    @extend .utility-container;
+  }
+
+  &.defender {
+    @extend .utility-container;
+
+  }
+
+  &.minimal {
+    @extend .utility-container;
+    flex-direction: row;
+    gap: 6px;
+    padding-left: 12px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.weapon-icon-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.weapon-icon {
+  position: relative;
+  height: 24px;
+  width: 100%;
+  object-fit: cover;
+  top: 8px;
+  left: -34px;
+  transform: rotateY(180deg);
+}
+
+.ultimate-tracker-container {
+  display: inline-flex;
+  height: 80px;
+  width: 80px;
+  align-items: center;
+  position: absolute;
+  left: -10px;
+  top: 30px;
+  // justify-content: center;
+}
+
+.ultimate-container.right {
+  transform: scaleX(-1);
+}
+
+.spike-icon-wrapper {
+  position: absolute;
+  align-items: center;
+  display: inline-flex;
+  justify-content: end;
+  flex: 0 0 auto;
+  justify-self: end;
+  left: -44px;
+  top: -112px;
+  z-index: 2;
+}
+
+.spike-icon {
+  position: relative;
+  width: 30px;
+  aspect-ratio: 1;
+  filter: brightness(0) invert(0);
+  z-index: 1;
+}
+
+.spike-bg {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  position: relative;
+  left: -32px;
+  top: -2px;
+}
+
+
+.rank-icon-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: -48px;
+  bottom: 0px;
+  z-index: 2;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.rank-icon {
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  height: 76px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 0px 0px 2px 32px;
+  position: relative;
+
+  &.defender {
+    @extend .player-info;
+  }
+
+  &.attacker {
+    @extend .player-info;
+  }
+
+  &.dead {
+    @extend .player-info;
+  }
+
+  &.minimal {
+    @extend .player-info;
+    width: 180px;
+  }
+}
+
+.spectator-icon-container {
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 20px;
+  right: 3px;
+}
+
+.spectator-icon-container.right {
+  transform: translateX(0px);
+}
+
+.spectator-icon {
+  width: 18px;
+  aspect-ratio: 1;
+  transform: translate(182px, 40px);
+  z-index: 2;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 4px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  top: -4px;
+  left: 5px;
+
+  &.minimal {
+    @extend .info-container;
+    top: -22px;
+  }
+}
+
+.shields-currency {
+  display: inline-flex;
+  height: 20px;
+  align-items: flex-end;
+  gap: 6px;
+  position: relative;
+}
+
+.captain-icon {
+  height: 17px;
+  width: 17px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.kda-container {
+  position: absolute;
+  left: 170px;
+  top: 27px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  color: white;
+  z-index: 1;
+}
+
+.kda-text {
+  font-family: "DIN Next W1G Bold", Helvetica;
+  font-size: 16px;
+}
+
+.currency-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  left: 170px;
+  top: -25px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.valorant-credits {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  color: white;
+}
+
+.currency-title {
+  position: relative;
+  width: fit-content;
+  font-family: "DIN Next W1G Regular", Helvetica;
+  font-size: 16px;
+  text-align: right;
+  line-height: normal;
+  white-space: nowrap;
+  color: white;
+  left: 10px;
+  top: -1px;
+}
+
+.username-container {
+  display: inline-flex;
+  height: 15px;
+  top: -46px;
+  left: 32px;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+.username-title {
+  position: relative;
+  width: fit-content;
+  font-family: "DIN Next W1G Regular", Helvetica;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+
+  &.minimal {
+    @extend .username-title;
+    font-size: 18px;
+  }
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 41px;
+}
+
+.stats-title {
+  @extend .currency-title;
+  color: white;
+}
+
+.stats-content {
+  @extend .username-title;
+  font-size: 18px;
+}
+
+app-shield-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  left: 34px;
+  top: -12px;
+  scale: 0.8;
+
+  &.right {
+    @extend app-shield-icon;
+    left: -32px;
+    transform: scaleX(1);
+  }
+}
+
+.health-container {
+  display: flex;
+  justify-content: center;
+  height: 46px;
+  width: 62px;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+  left: 238px;
+  top: 40px;
+}
+
+.health-amount {
+  position: relative;
+  width: 100%;
+  font-family: "DIN Next W1G Heavy", Helvetica;
+  font-size: 16px;
+  text-anchor: middle;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+  color: white;
+  top: 12px;
+}
+
+.health-bar {
+  position: absolute;
+  height: 7px;
+  left: 0;
+  top: 38px;
+  bottom: 0;
+  transition: width 0.2s ease-out;
+
+  &.attacker {
+    @extend .health-bar;
+    background-color: #E02853;
+  }
+
+  &.defender {
+    @extend .health-bar;
+    background-color: #46F4CF;
+  }
+}
+
+.abilities {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(32px, 45px);
+}
+
+#PlayerCard_PlayerClient {
+	position: absolute;
+	width: 350px;
+	height: 95px;
+	background-color: rgba(255,255,255,1);
+	overflow: hidden;
+	--web-view-name: PlayerCard_PlayerClient;
+	--web-view-id: PlayerCard_PlayerClient;
+	--web-scale-on-resize: true;
+	--web-enable-deep-linking: true;
+}
+#aaa {
+	position: absolute;
+	width: 350px;
+	height: 95px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+#aab {
+	fill: rgba(41,41,41,0.71);
+
+  .observed & {
+    fill: url(#aab);
+  }
+
+  .dead & {
+    fill: url(#aab-dead);
+  }
+}
+.aab {
+	position: absolute;
+	overflow: visible;
+	width: 348px;
+	height: 37px;
+	left: 1px;
+	top: 1px;
+}
+#aac {
+	fill: rgba(41,41,41,0.361);
+  
+  .observed & {
+    fill: url(#aac);
+  }
+
+    .dead & {
+    fill: url(#aac-dead);
+  }
+}
+.aac {
+	position: absolute;
+	overflow: visible;
+	width: 350px;
+	height: 95px;
+	left: 0px;
+	top: 0px;
+}
+#aad {
+	fill: transparent;
+	stroke: rgba(255,255,255,0.388);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.aad {
+	position: absolute;
+	overflow: visible;
+	width: 350px;
+	height: 95px;
+	left: 0px;
+	top: 0px;
+}
+#player-health-bg {
+	fill: url(#aaf);
+
+  .dead & {
+    fill: url(#aaf-dead);
+  }
+}
+.player-health-bg {
+	position: absolute;
+	overflow: visible;
+	width: 348px;
+	height: 7px;
+	left: 1px;
+	top: 38px;
+}
+
+#spectator-box {
+	opacity: 0.65;
+	fill: rgba(41,41,41,0.639);
+	stroke: rgba(255,255,255,0.58);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.spectator-box {
+	position: absolute;
+	overflow: visible;
+	height: 95px;
+	left: 178px;
+	top: 0px;
+  z-index: -1;
+}

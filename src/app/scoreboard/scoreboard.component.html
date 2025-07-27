@@ -1,0 +1,159 @@
+<div
+  class="scoreboard-container"
+  [class.non-auxiliary]="!showAuxScoreboard"
+  *ngIf="showScoreboard"
+  [@slideUpDown]="scoreboardAnimationState"
+  (@slideUpDown.done)="onAnimationDone($event)"
+>
+  <div class="scoreboard-header-container">
+    <div class="team-container">
+      <div class="team-side-color">
+        <img
+        [src]="match.teams[0].isAttacking
+            ? '/assets/scoreboard/roundReasons/redStroke.svg'
+            : '/assets/scoreboard/roundReasons/greenStroke.svg'
+        "/>
+      </div>
+      <div class="team-icon-container">
+        <img class="team-icon" src="{{ match.teams[0].teamUrl }}" />
+      </div>
+      <div class="teaminfo-wrapper-left">
+        <div class="teamname-text">
+          {{ match.teams[0].teamName.length > 23 ? (match.teams[0].teamName | slice:0:21) + '...' : match.teams[0].teamName }}
+        </div>
+        <div class="money-spent-container" *ngIf="!isMinimal()">
+          <div class="money-spent-wrapper">
+            <img class="credits-icon" src="../../assets/misc/ValorantCreditsWhite.svg" />
+            {{ match.teams[0].spentThisRound }}
+          </div>
+          <div class="money-spent-label-text">LOADOUT VALUE</div>
+        </div>
+      </div>
+    </div>
+    <app-roundreasons class="round-reasons" [match]="match" />
+    <div class="team-container flip">
+      <div class="team-side-color flip">
+        <img
+        [src]="match.teams[1].isAttacking
+            ? '/assets/scoreboard/roundReasons/redStroke.svg'
+            : '/assets/scoreboard/roundReasons/greenStroke.svg'
+        "/>
+      </div>
+      <div class="team-icon-container">
+        <img class="team-icon flip" src="{{ match.teams[1].teamUrl }}" />
+      </div>
+      <div class="teaminfo-wrapper-right flip">
+        <div class="teamname-text">
+          {{ match.teams[1].teamName.length > 23 ? (match.teams[1].teamName | slice:0:21) + '...' : match.teams[1].teamName }}
+        </div>
+        <div class="money-spent-container" *ngIf="!isMinimal()">
+          <div class="money-spent-label-text">LOADOUT VALUE</div>
+          <div class="money-spent-wrapper">
+            <img class="credits-icon" src="../../assets/misc/ValorantCreditsWhite.svg" />
+            {{ match.teams[1].spentThisRound }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scoreboard-label-text">
+    <div class="player-display">PLAYER</div>
+    <div class="kda-display">K       D       A</div>
+    <div class="abilities-display">
+      {{ showAuxScoreboard ? 'ABILITIES' : 'ULTIMATE' }}
+    </div>
+    <div class="shield-display">SHIELD</div>
+    <div class="loadout-display">LOADOUT</div>
+    <div class="creds-display">CREDS</div>
+  </div>
+  <div class="scoreboard-label-text flipped">
+    <div class="creds-display-right">CREDS</div>
+    <div class="loadout-display-right">LOADOUT</div>
+    <div class="shield-display-right">SHIELD</div>
+    <div class="abilities-display-right">
+      {{ showAuxScoreboard ? 'ABILITIES' : 'ULTIMATE' }}
+    </div>
+    <div class="kda-display-right">K       D       A</div>
+    <div class="player-display-right">PLAYER</div>
+  </div>
+  <!-- loading full info playerscores -->
+  <div class="scoreboard-box-container">
+    <!-- Show auxiliary overlays if at least one player has auxiliary abilities and hideAuxiliary is false -->
+    <ng-container *ngIf="showAuxScoreboard; else noAuxScoreboard">
+      <div class="graphics-left">
+        <img class="vector3-left" src="/assets/scoreboard/overlay1.svg" />
+        <img class="vector4-left" src="/assets/scoreboard/overlay2.svg" />
+      </div>
+      <div class="graphics-right">
+        <img class="vector3-right" src="/assets/scoreboard/overlay1.svg" />
+        <img class="vector4-right" src="/assets/scoreboard/overlay2.svg" />
+      </div>
+    </ng-container>
+    <ng-template #noAuxScoreboard>
+      <div class="graphics-left hideAuxiliary">
+        <img class="vector3-left" src="/assets/scoreboard/overlay1_nonAuxiliary.svg" />
+        <img class="vector4-left" src="/assets/scoreboard/overlay2_nonAuxiliary.svg" />
+      </div>
+      <div class="graphics-right hideAuxiliary">
+        <img class="vector3-right" src="/assets/scoreboard/overlay1_nonAuxiliary.svg" />
+        <img class="vector4-right" src="/assets/scoreboard/overlay2_nonAuxiliary.svg" />
+      </div>
+    </ng-template>
+  </div>
+  <div class="team-round-reasons-box">
+    <img class="round-reason-vector" src="/assets/scoreboard/roundReasons/teamRoundReasons.svg" />
+  </div>
+  <div class="scoreboard-content-container" *ngIf="!isMinimal()">
+    <div class="playerscore-wrapper">
+      <app-playerscore
+        *ngFor="let player of match.teams[0].players | scoreboardOrder; trackBy: trackByPlayerId"
+        [match]="match"
+        [player]="player"
+        [color]="match.teams[0].isAttacking ? 'attacker' : 'defender'"
+        [hideAuxiliary]="hideAuxiliary"
+        [shiftUltimate]="
+          !player.auxiliaryAvailable?.abilities &&
+          numPlayersWithoutAbilities > 0 &&
+          numPlayersWithoutAbilities < totalPlayers
+        "
+        side="left"
+      ></app-playerscore>
+    </div>
+    <div class="playerscore-wrapper flip">
+      <app-playerscore
+        *ngFor="let player of match.teams[1].players | scoreboardOrder; trackBy: trackByPlayerId"
+        [match]="match"
+        [player]="player"
+        [color]="match.teams[1].isAttacking ? 'attacker' : 'defender'"
+        [hideAuxiliary]="hideAuxiliary"
+        [shiftUltimate]="
+          !player.auxiliaryAvailable?.abilities &&
+          numPlayersWithoutAbilities > 0 &&
+          numPlayersWithoutAbilities < totalPlayers
+        "
+        side="right"
+      ></app-playerscore>
+    </div>
+  </div>
+  <!-- loading minimal info playerscores -->
+  <div class="scoreboard-content-container" *ngIf="isMinimal()">
+    <div class="playerscore-wrapper">
+      <app-playerscore-minimal
+        *ngFor="let player of match.teams[0].players | scoreboardOrder; trackBy: trackByPlayerId"
+        [match]="match"
+        [player]="player"
+        [color]="match.teams[0].isAttacking ? 'attacker' : 'defender'"
+        side="left"
+      />
+    </div>
+    <div class="playerscore-wrapper flip">
+      <app-playerscore-minimal
+        *ngFor="let player of match.teams[1].players | scoreboardOrder; trackBy: trackByPlayerId"
+        [match]="match"
+        [player]="player"
+        [color]="match.teams[1].isAttacking ? 'attacker' : 'defender'"
+        side="right"
+      />
+    </div>
+  </div>
+</div>

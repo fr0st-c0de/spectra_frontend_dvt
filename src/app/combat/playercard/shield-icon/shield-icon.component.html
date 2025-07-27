@@ -1,0 +1,42 @@
+<img
+  *ngIf="type === 'Heavy' && side === 'attacker'"
+  src="/assets/shields/HeavyRed.svg"
+  alt="Heavy Shield Attacker"
+/>
+<img
+  *ngIf="type === 'Heavy' && side === 'defender'"
+  src="/assets/shields/HeavyGreen.svg"
+  alt="Heavy Shield Defender"
+/>
+<img
+  *ngIf="type === 'Light' && side === 'attacker'"
+  src="/assets/shields/LightRed.svg"
+  alt="Light Shield Attacker"
+/>
+<img
+  *ngIf="type === 'Light' && side === 'defender'"
+  src="/assets/shields/LightGreen.svg"
+  alt="Light Shield Defender"
+/>
+<img class="regen"
+  *ngIf="type === 'Regen' && side === 'attacker'"
+  src="/assets/shields/RegenRed.svg"
+  alt="Regen Shield Attacker"
+/>
+<img class="regen"
+  *ngIf="type === 'Regen' && side === 'defender'"
+  src="/assets/shields/RegenGreen.svg"
+  alt="Regen Shield Defender"
+/>
+<img
+  *ngIf="type === 'None' && side === 'attacker'"
+  src="/assets/shields/NoneRed.svg"
+  alt="No Shield Attacker"
+/>
+<img
+  *ngIf="type === 'None' && side === 'defender'"
+  src="/assets/shields/NoneGreen.svg"
+  alt="No Shield Defender"
+/>
+
+
